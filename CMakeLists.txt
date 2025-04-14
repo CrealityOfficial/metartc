@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 2.8)
+project(MetaRTC)
+#list(APPEND CMAKE_MODULE_PATH "/home/creality/C3DSlicer/cmake/modules")
+#set(CMAKE_PREFIX_PATH /home/creality/Deps_Lib/usr/local/)
+#set(CMAKE_INSTALL_PREFIX /home/creality/Deps_Lib/usr/local/)
+#find_package(FFmpeg REQUIRED COMPONENTS avcodec avformat avutil swscale)
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	#set(DEFS  WIN32_LEAN_AND_MEAN)
+	add_definitions(-DWIN32_LEAN_AND_MEAN) 
+endif()	
+
+add_subdirectory(libmetartc6)
+add_subdirectory(libmetartccore6)
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	add_subdirectory(yangwincodec6)
+endif()
+
+INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include/metartc)
+INSTALL(TARGETS metartc6 RUNTIME DESTINATION . LIBRARY DESTINATION ./lib ARCHIVE DESTINATION lib)
+INSTALL(TARGETS metartccore6 RUNTIME DESTINATION . LIBRARY DESTINATION ./lib ARCHIVE DESTINATION lib)
+

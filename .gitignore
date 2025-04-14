@@ -1,0 +1,5 @@
+/win32-build
+/mac-build
+/.vscode
+/build
+/linux-build
